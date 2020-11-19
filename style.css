@@ -1,0 +1,114 @@
+* {
+    margin:0;
+    padding:0;
+}
+
+.titleStyle {
+    font-family: 'Caveat', cursive;
+    text-align:center;
+    align-items: center;
+    justify-content: center;
+    color:white;
+} 
+
+body {
+    background:black;
+}
+
+.headingStyle {
+    text-align:center;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Caveat', cursive;
+    color:white;
+}
+.audioClass {
+    align-items: center;
+    justify-content: center;
+    margin-left:600px;
+    margin-top:15px;
+}
+.textStyle {
+    text-align:center;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    font-family: 'Dancing Script', cursive;
+}
+.textStyle1 {
+    text-align:center;
+    align-items: center;
+    justify-content: center;
+    color:#e8dd15;
+    font-family: 'Dancing Script', cursive;
+}
+.textStyle2 {
+    font-size:30px;
+    justify-content: center;
+    color:#e38605;
+    font-family: 'Dancing Script', cursive;
+}
+
+.textStyle3{
+    font-size:30px;
+    justify-content: center;
+    color:#d6d1ff;
+    font-family: 'Dancing Script', cursive;
+}
+
+.timeStyle {
+    text-align:center;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    font-family: 'Dancing Script', cursive;
+    animation:zoom 8s ease-in-out infinite;
+}
+@keyframes zoom {
+    50% {
+        font-size:28px;
+    }
+    75% {
+        font-size:32px;
+        color:#e01b25;
+    }
+    90% {
+        font-size:34px;
+        color:#e01b25;
+    }
+}
+
+.centerdiv {
+    width:750px;
+    height:500px;
+    margin-left:370px;
+    background:linear-gradient(45deg, slateblue, purple, slateblue);
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-radius:100px;
+    flex-direction: column;
+}
+
+  .middleBox #answ {
+    margin:30px 0;
+    padding:5px 0;
+    font-size:30px;
+    text-align:center;
+    width:180px;
+    font-family: 'Dancing Script', cursive;
+}
+
+.carousel {
+    height:700px;
+    perspective: 600px;
+}
+
+.carousel .carousel-item {
+    width:400px;
+}
+
+.carousel .carousel-item img {
+    width:250px;
+    height:250px;
+}

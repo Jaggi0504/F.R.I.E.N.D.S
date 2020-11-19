@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> F.R.I.E.N.D.S </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+        }
+
+        img {
+            border-radius: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="textStyle1"> Monica: So, you think it's easy to tell everything about me? </h1>
+    <h1 class="textStyle1"> Play the below audio. I want to tell you something </h1>
+    <img src="https://media2.giphy.com/media/gHtbuhGYTlzkEPBVlu/200.webp?cid=ecf05e47ergez42stf8zq66l345fpptbvt9472qnp8o4m6cs&rid=200.webp"
+        style="margin-left:620px;">
+    <audio class="audioClass" controls src="monica.mp3">
+        Your browser does not support the
+        <code>audio</code> element.
+    </audio>
+    <h1 class="textStyle1"> Okay! let's see </h1> <br> <br>
+    <div class="row">
+        <div class="col-sm-6">
+            <img src="https://media2.giphy.com/media/AActpIFHIuQTK/200.webp?cid=ecf05e473b2ynib3xnagll8nzi0xxgpe3rqctii4ibhe3wzl&rid=200.webp"
+                style="margin-left:80px;">
+            <h2 class="textStyle1" style="margin-left:-100px;"> I'll dance like this if you tell everything correctly
+            </h2>
+        </div>
+        <div class="col-sm-6">
+            <img src="https://media0.giphy.com/media/VL1X7RWK4guas/200w.webp?cid=ecf05e473b2ynib3xnagll8nzi0xxgpe3rqctii4ibhe3wzl&rid=200w.webp"
+                style="margin-left:400px;">
+            <h2 class="textStyle1" style="margin-left:250px;"> And this you know reall well </h2>
+        </div>
+    </div> <br>
+    <section>
+        <h2 class="textStyle1"> {{  Remember, as soon as you select the level, the clock starts ticking }} </h2>
+        <h2 class="textStyle1"> Please select the level first!
+            <div class="optionStyle">
+                <select id="level" onchange="actionOnSubmit()" style="align-items:center; text-align:center;">
+                    <option style="color:burlywood;"> Start </option>
+                    <option value="22" style="color:rgb(222, 141, 135);"> EASY </option>
+                    <option value="20" style="color:rgb(222, 141, 135);"> MEDIUM </option>
+                    <option value="18" style="color:rgb(222, 141, 135);;"> HARD </option>
+                </select>
+            </div>
+        </h2>
+
+        <h2 id="demo" class="textStyle"> </h2> <br> <br>
+        <h3 class="timeStyle"> Time Left: <span id="time"> 0 </span> </h3> <br> <br>
+        <h2 class="textStyle1"> Score: <span id="score"> 0 </span> </h2> <br>
+
+
+        <div class="centerdiv" id="centerdiv">
+            <h2 class="textStyle2">Make sure that you type everything in lowercase </h2>
+            <h3 class="textStyle2">TURN OFF THE CAPS LOCK </h3>
+            <div class="question">
+                <h1 class="textStyle" id="question"> Question: </h1>
+            </div>
+            <div class="middleBox">
+                <input type="text" id="answ" placeholder="Answer" class="inputTextStyle">
+            </div>
+            <h2 id="message" class="textStyle3"> </h2>
+            <img id="imageID">
+        </div>
+
+    </section>
+    <br><br><br><br>
+
+    <script>
+
+        let isPlaying;
+        let ans;
+        let score = 0;
+        let Time;
+
+        const scores = document.querySelector('#score');
+        const message = document.querySelector('#message');
+        const times = document.querySelector('#time');
+        const userans = document.querySelector('#answ');
+        const correctAns = document.querySelector("#correctAns");
+
+        function actionOnSubmit() {
+            var x = document.getElementById("level").value;
+            document.getElementById("demo").innerHTML = "The level you have selected has time limit: " + x + "  seconds";
+            Time = x;
+            setInterval(countdown, 1000);
+            setInterval(checkStatus, 1000);
+            setQuestion();
+            userans.addEventListener('input', startMatch);
+        }
+
+
+        function setQuestion() {
+            const array = [`What was Monica's brother's name?`,
+                `Who married Monica?`,
+                `What was Monica's age when she dated a guy from junior school? A: 23, B: 24, C: 26, D: 28`,
+                `Who found out first about Chandler and Monica? A: Ross, B: Joey, C: Rachel, D: Phoebe`,
+                `Who peed on Monica's leg when she got stung by a Jellyfish? A: Ross, B: Joey, C: Chandler, D: Phoebe`,
+                `How many categories of towel did Monica have? A: 10, B:11, C:15, D: 20`,
+                `Name that guy with a moustache who dated Monica?`,
+                `What was Monica's Mother's name? A: Julie, B: Judy, C:Jane, D: Jonah`,
+                `The person who was referred as the "Wine Guy"`,
+                `In which city did Monica and Chandler slept together?`,
+                `Who was Monica's first kiss? A:Chandler, B:Richard, C: Paul, D:Ross`,
+                `Who was Monica's eye doctor (Only the first name)?`,
+                `Did Joey ever kiss Monica (yes/no)?`,
+                `It was very hard for Monica to break up with whom (The guy with a moustache)?`,
+                `Last name of Dr. Richard? A:Burge, B: Burke, C: Geller, D: Thomas`,
+                `Before marriage, Monica shared her flat with? A:Chandler, B: Ross, C: Rachel, D: Joey`
+            ]
+            const index = Math.floor(Math.random() * array.length);
+            question.innerHTML = array[index];
+        }
+
+        function checkStatus() {
+            if (!isPlaying && Time === 0) {
+                message.innerHTML = `Game over!! The correct answer is "${ans}". Refresh to play again`;
+                $('#centerdiv').text("Time's Up! Refresh the page to start again!");
+                $('#centerdiv').css({
+                    color:"#fff0f0",
+                    fontSize:"38px",
+                    fontFamily: "Caveat, cuursive"
+                })
+            }
+        }
+
+        function countdown() {
+            if (Time > 0)
+                Time--;
+            else if (Time === 0) {
+                isPlaying = false;
+                score = -10;
+            }
+            times.innerHTML = Time;
+        }
+
+        function startMatch() {
+            if (matchAns()) {
+                Time = document.getElementById("level").value;
+                userans.value = "";
+                setQuestion()
+                score = score + 10;
+
+
+            }
+            if (score === -10)
+                scores.innerHTML = 0;
+            else if (score == 220) {
+                celebrate(score)
+            }
+            else
+                scores.innerHTML = score;
+        }
+
+        function celebrate(score) {
+            question.innerHTML = `Congratulations, you answered every question correctly!`;
+            message.innerHTML = `Great Job! Refresh to Reload`;
+            Time = 1000;
+
+        }
+
+        function matchAns() {
+            ans;
+            if (question.innerHTML == `What was Monica's brother's name?`) {
+                ans = `ross`
+            } else if (question.innerHTML == `Who married Monica?`) {
+                ans = `chandler`
+            } else if (question.innerHTML == `What was Monica's age when she dated a guy from junior school? A: 23, B: 24, C: 26, D: 28`) {
+                ans = `26`;
+            } else if (question.innerHTML == `Who found out first about Chandler and Monica? A: Ross, B: Joey, C: Rachel, D: Phoebe`) {
+                ans = `joey`
+            } else if (question.innerHTML == `Who peed on Monica's leg when she got stung by a Jellyfish? A: Ross, B: Joey, C: Chandler, D: Phoebe`) {
+                ans = `chandler`
+            } else if (question.innerHTML == `How many categories of towel did Monica have? A: 10, B:11, C:15, D: 20`) {
+                ans = `11`
+            } else if (question.innerHTML == `Name that guy with a moustache who dated Monica?`) {
+                ans = `richard`
+            } else if (question.innerHTML == `What was Monica's Mother's name? A: Julie, B: Judy, C:Jane, D: Jonah`) {
+                ans = `judy`
+            } else if (question.innerHTML == `The person who was referred as the "Wine Guy"`) {
+                ans = `paul`;
+            } else if (question.innerHTML == `In which city did Monica and Chandler slept together?`) {
+                ans = `london`
+            } else if (question.innerHTML == `Who was Monica's first kiss? A:Chandler, B:Richard, C: Paul, D:Ross`) {
+                ans = `ross`
+            } else if (question.innerHTML == `Who was Monica's eye doctor (Only the first name)?`) {
+                ans = `richard`
+            } else if (question.innerHTML == `Did Joey ever kiss Monica (yes/no)?`) {
+                ans = `no`;
+            } else if (question.innerHTML == `It was very hard for Monica to break up with whom (The guy with a moustache)?`) {
+                ans = `richard`
+            } else if (question.innerHTML == `Last name of Dr. Richard? A:Burge, B: Burke, C: Geller, D: Thomas`) {
+                ans = `burke`
+            } else if (question.innerHTML == `Before marriage, Monica shared her flat with? A:Chandler, B: Ross, C: Rachel, D: Joey`) {
+                ans = `rachel`
+            }
+
+
+
+            if (userans.value == ans) {
+                message.innerHTML = "Correct";
+                return true;
+            } else {
+                message.innerHTML = "Incorrect";
+                return false;
+            }
+        }
+
+
+    </script>
+
+
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+</html>

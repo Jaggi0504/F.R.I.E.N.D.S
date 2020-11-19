@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> F.R.I.E.N.D.S </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <style>
+            body {
+                background-color: black;
+            }
+            image {
+                align-items:center;
+                text-align:center;
+                width:100%;
+                height:100%;
+                align-items: center;
+                justify-content: center;
+            }
+            h2 {
+                animation:animate 5s ease-in-out infinite;
+            }
+            @keyframes animate {
+                0% {
+                    color:#e9f542;
+                }
+                25% {
+                    color:#e9f542;
+
+                }
+                50% {
+                    color:#3a13d6;
+                }
+                100% {
+                    color:#3a13d6;
+                }
+            }
+            .polystar {
+                margin-right:500px;
+            }
+        </style>
+    </head>
+    <body>
+        <audio class="audioClass" id="mainaudio" controls
+        src="https://pragmaticcomputing.files.wordpress.com/2017/04/friends_theme_song.mp3">
+        </audio>
+        <h1 class="titleStyle" id="audiotitle"> F.R.I.E.N.D.S </h1>
+        <h2 class="headingStyle"> The Classic Quiz </h2>
+        <div class="row">
+           <div class="col-sm-1"></div>
+            <div class="col-sm-4">
+                <video src="video.mp4" id="polystar" poster="https://wallpapercave.com/wp/wp3488427.jpg" preload muted="muted">
+                    </video>
+            </div>
+            <div class="col-sm-7">
+            </div>
+        </div>
+        <div class="carousel">
+            <div class="carousel-item">
+                <img src="https://wallpapercave.com/wp/bbqH0Hd.jpg">
+            </div>  
+            <div class="carousel-item">
+                <img src="https://wallpapercave.com/wp/VSx6fFa.jpg">
+            </div> 
+            <div class="carousel-item">
+                <img src="https://wallpapercave.com/wp/vhrSNuJ.jpg">
+            </div> 
+            <div class="carousel-item">
+                <img src="https://wallpapercave.com/wp/2ZKX3fm.jpg">
+            </div> 
+            <div class="carousel-item">
+                <img src="https://wallpapercave.com/wp/XHVnERI.jpg">
+            </div> 
+            <div class="carousel-item">
+                <img src="https://wallpapercave.com/wp/dEr3uYi.jpg">
+            </div> 
+            <div class="carousel-item">
+                <img src="https://wallpapercave.com/wp/1IRzRMS.jpg">
+            </div> 
+            <div class="carousel-item">
+                <img src="https://wallpapercave.com/wp/wp2595476.jpg">
+            </div> 
+            <div class="carousel-item">
+                <img src="https://wallpapercave.com/wp/wp4112175.jpg">
+            </div>  
+        </div>
+        <h2 class="textStyle"> So, Welcome to the F.R.I.E.N.D.S game </h2>
+        <h2 class="textStyle"> Let's see, how good you are </h2> 
+        <a 
+        href="mainpage.html" 
+        style="margin-left:665px; color:#07f77b; font-size:40px; font-family: 'Dancing Script', cursive;"> 
+        Click Here! </a>
+        <br><br>
+    </body>
+    <script>
+    function setup() {
+        createCanvas(windowWidth, windowHeight);
+    }
+    function draw() {
+        const col = {};
+        const {r, g, b} = col;
+        col.r = random(0, 255);
+        col.g = random(0, 255);
+        col.b = random(0, 255);
+        fill(col.r, col.g, col.b);
+        circle(mouseX, mouseY, 200, 200);
+    }
+    $('')
+    $(document).ready(function(){
+    $('.carousel').carousel();
+    $('#mainaudio').hide();
+    $('#audiotitle').bind('mouseover', function() {
+        $('#mainaudio').show(1500);
+    });
+    var polystar = $('#polystar');
+    $(polystar).on('mouseenter', function() {
+        $(polystar).get(0).play();
+        // $(polystar).prop('muted', false);
+
+    });
+    $(polystar).on('mouseleave', function() {
+        $(polystar).get(0).pause();
+    });
+    });
+    </script>
+</html>

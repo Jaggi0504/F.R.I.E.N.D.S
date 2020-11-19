@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> F.R.I.E.N.D.S </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+        }
+
+        img {
+            border-radius: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="textStyle1"> Phoebe: Hahaha, you're so good! </h1>
+    <h1 class="textStyle1"> Play the below audio. You will get to know how I make fun of funny people </h1>
+    <img src="https://media2.giphy.com/media/jhWcFauCmhSHC/giphy.webp?cid=ecf05e47jb0dkso1bf2488y3lzlzhtuh2fz6ft4lrot36s1j&rid=giphy.webp"
+        style="margin-left:620px;">
+    <audio class="audioClass" controls src="phoebe.mp3">
+        Your browser does not support the
+        <code>audio</code> element.
+    </audio>
+    <h1 class="textStyle1"> Okay! let's see </h1> <br> <br>
+    <div class="row">
+        <div class="col-sm-6">
+            <img src="https://media2.giphy.com/media/JGH2CwqB4oqGc/giphy.webp?cid=ecf05e47jb0dkso1bf2488y3lzlzhtuh2fz6ft4lrot36s1j&rid=giphy.webp"
+                style="margin-left:80px;">
+            <h2 class="textStyle1" style="margin-left:-100px;"> I'll dance like this if you tell everything correctly
+            </h2>
+        </div>
+        <div class="col-sm-6">
+            <img src="https://media1.giphy.com/media/oS4bJ2sRXKVDa/200w.webp?cid=ecf05e472b7bwo98ia2sf3971fmm0a0ztte43clzw9nnigd2&rid=200w.webp"
+                style="margin-left:350px;">
+            <h2 class="textStyle1" style="margin-left:250px;"> And, I don't wanna hurt my eyes! </h2>
+        </div>
+    </div> <br>
+    <section>
+        <h2 class="textStyle1"> {{  Remember, as soon as you select the level, the clock starts ticking }} </h2>
+        <h2 class="textStyle1"> Please select the level first!
+            <div class="optionStyle">
+                <select id="level" onchange="actionOnSubmit()" style="align-items:center; text-align:center;">
+                    <option style="color:burlywood;"> Start </option>
+                    <option value="22" style="color:rgb(222, 141, 135);"> EASY </option>
+                    <option value="20" style="color:rgb(222, 141, 135);"> MEDIUM </option>
+                    <option value="18" style="color:rgb(222, 141, 135);;"> HARD </option>
+                </select>
+            </div>
+        </h2>
+
+        <h2 id="demo" class="textStyle"> </h2> <br> <br>
+        <h3 class="timeStyle"> Time Left: <span id="time"> 0 </span> </h3> <br> <br>
+        <h2 class="textStyle1"> Score: <span id="score"> 0 </span> </h2> <br>
+
+
+        <div class="centerdiv" id="centerdiv">
+            <h2 class="textStyle2">Make sure that you type everything in lowercase </h2>
+            <h3 class="textStyle2">TURN OFF THE CAPS LOCK </h3>
+            <div class="question">
+                <h1 class="textStyle" id="question"> Question: </h1>
+            </div>
+            <div class="middleBox">
+                <input type="text" id="answ" placeholder="Answer" class="inputTextStyle">
+            </div>
+            <h2 id="message" class="textStyle3"> </h2>
+            <img id="imageID">
+        </div>
+
+    </section>
+    <br><br><br><br>
+
+    <script>
+
+        let isPlaying;
+        let ans;
+        let score = 0;
+        let Time;
+
+        const scores = document.querySelector('#score');
+        const message = document.querySelector('#message');
+        const times = document.querySelector('#time');
+        const userans = document.querySelector('#answ');
+        const correctAns = document.querySelector("#correctAns");
+
+        function actionOnSubmit() {
+            var x = document.getElementById("level").value;
+            document.getElementById("demo").innerHTML = "The level you have selected has time limit: " + x + "  seconds";
+            Time = x;
+            setInterval(countdown, 1000);
+            setInterval(checkStatus, 1000);
+            setQuestion();
+            userans.addEventListener('input', startMatch);
+        }
+
+
+        function setQuestion() {
+            const array = [`Phoebe's last name? A: Geller, B: Green, C: Buffay, D: Bing`,
+                `Phoebe's favourite song? A: Piper, B: Smelly cat, C: Ding Dong`,
+                `How much money does Phoebe get after finding a thumb in her soda? A: 1000, B: 5000, C: 7000, D: 10000`,
+                `When Phoebe has all of the friends sing "Smelly Cat" who DOESN'T get a solo? A: Ross, B: Chandler, C: Joey, D: Monica`,
+                `After Phoebe misses out on the London trip, where does the group try and plan a trip to? A: Africa, B; America, C: Atlantic, D: Coney Island`,
+                `What's the name of Phoebe's very enthusiastic date, played by Alec Baldwin? A: Peter, B: Paul, C: Parker`
+            ]
+            const index = Math.floor(Math.random() * array.length);
+            question.innerHTML = array[index];
+        }
+
+        function checkStatus() {
+            if (!isPlaying && Time === 0) {
+                message.innerHTML = `Game over!! The correct answer is "${ans}". Refresh to play again`;
+                $('#centerdiv').text("Time's Up! Refresh the page to start again!");
+                $('#centerdiv').css({
+                    color: "#fff0f0",
+                    fontSize: "38px",
+                    fontFamily: "Caveat, cuursive"
+                })
+            }
+        }
+
+        function countdown() {
+            if (Time > 0)
+                Time--;
+            else if (Time === 0) {
+                isPlaying = false;
+                score = -10;
+            }
+            times.innerHTML = Time;
+        }
+
+        function startMatch() {
+            if (matchAns()) {
+                Time = document.getElementById("level").value;
+                userans.value = "";
+                setQuestion()
+                score = score + 10;
+
+
+            }
+            if (score === -10)
+                scores.innerHTML = 0;
+            else if (score == 100) {
+                celebrate(score)
+            }
+            else
+                scores.innerHTML = score;
+        }
+
+        function celebrate(score) {
+            question.innerHTML = `Congratulations, you answered every question correctly!`;
+            message.innerHTML = `Great Job! Refresh to Reload`;
+            Time = 1000;
+
+        }
+
+        function matchAns() {
+            ans;
+            if (question.innerHTML == `Phoebe's last name? A: Geller, B: Green, C: Buffay, D: Bing`) {
+                ans = `buffay`
+            } else if (question.innerHTML == `Who married Chandler? A: Rachel, B: Monica, C: Phoebe`) {
+                ans = `monica`
+            } else if (question.innerHTML == `Phoebe's favourite song? A: Piper, B: Smelly cat, C: Ding Dong`) {
+                ans = `smelly cat`;
+            } else if (question.innerHTML == `How much money does Phoebe get after finding a thumb in her soda? A: 1000, B: 5000, C: 7000, D: 10000`) {
+                ans = `7000`
+            } else if (question.innerHTML == `When Phoebe has all of the friends sing "Smelly Cat" who DOESN'T get a solo? A: Ross, B: Chandler, C: Joey, D: Monica`) {
+                ans = `ross`
+            } else if (question.innerHTML == `After Phoebe misses out on the London trip, where does the group try and plan a trip to? A: Africa, B; America, C: Atlantic, D: Coney Island`) {
+                ans = `atlantic city`
+            } else if (question.innerHTML == `What's the name of Phoebe's very enthusiastic date, played by Alec Baldwin? A: Peter, B: Paul, C: Parker`) {
+                ans = `parker`
+            }
+
+
+
+            if (userans.value == ans) {
+                message.innerHTML = "Correct";
+                return true;
+            } else {
+                message.innerHTML = "Incorrect";
+                return false;
+            }
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

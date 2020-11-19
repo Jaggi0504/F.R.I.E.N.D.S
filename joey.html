@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> F.R.I.E.N.D.S </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+        }
+
+        img {
+            border-radius: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="textStyle1"> Joey: How You Doin' </h1>
+    <h1 class="textStyle1"> Play the below audio. I want to tell you something </h1>
+    <img src="https://media1.giphy.com/media/11SIBu3s72Co8w/200w.webp?cid=ecf05e47q3qw88cp2uc8zx28slu5kzjha647o4xlagtk7tm3&rid=200w.webp"
+        style="margin-left:650px;">
+    <audio class="audioClass" controls src="joey.mp3">
+        Your browser does not support the
+        <code>audio</code> element.
+    </audio>
+    <h1 class="textStyle1"> Okay! let's see </h1> <br> <br>
+    <div class="row">
+        <div class="col-sm-6">
+            <img src="https://media4.giphy.com/media/zd9wcDX4H4z4I/200w.webp?cid=ecf05e47q3qw88cp2uc8zx28slu5kzjha647o4xlagtk7tm3&rid=200w.webp"
+                style="margin-left:120px;">
+            <h2 class="textStyle1" style="margin-left:-100px;"> I'll dance like this if you tell everything correctly
+            </h2>
+        </div>
+        <div class="col-sm-6">
+            <img src="https://media2.giphy.com/media/XJCL959KwYbE4/giphy.webp?cid=ecf05e47ubrzdvk9bkpmb2iukygeas529i83tu192b2xpgvi&rid=giphy.webp"
+                style="margin-left:400px;" id="image1">
+            <h2 class="textStyle1" style="margin-left:250px;"> Told ya! Better luck next time </h2>
+        </div>
+    </div> <br>
+    <section>
+        <h2 class="textStyle1"> {{  Remember, as soon as you select the level, the clock starts ticking }} </h2>
+        <h2 class="textStyle1"> Please select the level first!
+            <div class="optionStyle">
+                <select id="level" onchange="actionOnSubmit()" style="align-items:center; text-align:center;">
+                    <option style="color:burlywood;"> Start </option>
+                    <option value="22" style="color:rgb(222, 141, 135);"> EASY </option>
+                    <option value="20" style="color:rgb(222, 141, 135);"> MEDIUM </option>
+                    <option value="18" style="color:rgb(222, 141, 135);;"> HARD </option>
+                </select>
+            </div>
+        </h2>
+
+        <h2 id="demo" class="textStyle"> </h2> <br> <br>
+        <h3 class="timeStyle"> Time Left: <span id="time"> 0 </span> </h3> <br> <br>
+        <h2 class="textStyle1"> Score: <span id="score"> 0 </span> </h2> <br>
+
+
+        <div class="centerdiv" id="centerdiv">
+            <h2 class="textStyle2">Make sure that you type everything in lowercase </h2>
+            <h3 class="textStyle2">TURN OFF THE CAPS LOCK </h3>
+            <div class="question">
+                <h1 class="textStyle" id="question"> Question: </h1>
+            </div>
+            <div class="middleBox">
+                <input type="text" id="answ" placeholder="Answer" class="inputTextStyle">
+            </div>
+            <h2 id="message" class="textStyle3"> </h2>
+            <img id="imageID">
+        </div>
+
+    </section>
+    <br><br><br><br>
+
+    <script>
+
+        let isPlaying;
+        let ans;
+        let score = 0;
+        let Time;
+
+        const scores = document.querySelector('#score');
+        const message = document.querySelector('#message');
+        const times = document.querySelector('#time');
+        const userans = document.querySelector('#answ');
+        const correctAns = document.querySelector("#correctAns");
+
+        function actionOnSubmit() {
+            var x = document.getElementById("level").value;
+            document.getElementById("demo").innerHTML = "The level you have selected has time limit: " + x + "  seconds";
+            Time = x;
+            setInterval(countdown, 1000);
+            setInterval(checkStatus, 1000);
+            setQuestion();
+            userans.addEventListener('input', startMatch);
+        }
+
+
+        function setQuestion() {
+            const array = [`Joey used to share his flat with? A: Chandler, B: Ross, C: Monica, D: Rachel`,
+                `Joey doesn't share his? A: Drink, A: Food, C: Flat, D: Shoes`,
+                `Which famous actor was Joey the "butt double" for? A:Robert De Niro, B: Al Pacino C: Arnold D: Joe`,
+                `What book does Joey read while Rachel reads The Shining? A: Jane Eyre, B: Little Women, C: Pride & Prejudice D: Emma`,
+                `Which letter encyclopedia volume does Joey buy? A: Q, B: T, C: X, D: V`,
+                `Which item left at the hotel signals to Joey that Chandler and Monica are dating? A: Tweezers, B: Eyelash Curler, C: Hair Dryer`,
+                `How does Joey say he knows Mike when he sets Phoebe up on the blind date? A: School, B: Acting, C: Gym, D: Family friend`,
+                `What game show was Joey a contestant on? A: Wheel of Fortune, B: Pyramid, C: Jeopardy, D: Family Feud`,
+                `Whose mother did Joey kiss at a party? A: Ross, B: Rachel, C: Chandler, D: Phoebe`,
+                `In which city did Joey find out about Chandler and Monica? A: New York, B: London, C: Amsterdam`
+            ]
+            const index = Math.floor(Math.random() * array.length);
+            question.innerHTML = array[index];
+        }
+
+        function checkStatus() {
+            if (!isPlaying && Time === 0) {
+                message.innerHTML = `Game over!! The correct answer is "${ans}". Refresh to play again`;
+                $('#centerdiv').text("Time's Up! Refresh the page to start again!");
+                $('#centerdiv').css({
+                    color: "#fff0f0",
+                    fontSize: "38px",
+                    fontFamily: "Caveat, cuursive"
+                })
+            }
+        }
+
+        function countdown() {
+            if (Time > 0)
+                Time--;
+            else if (Time === 0) {
+                isPlaying = false;
+                score = -10;
+            }
+            times.innerHTML = Time;
+        }
+
+        function startMatch() {
+            if (matchAns()) {
+                Time = document.getElementById("level").value;
+                userans.value = "";
+                setQuestion()
+                score = score + 10;
+
+
+            }
+            if (score === -10)
+                scores.innerHTML = 0;
+            else if (score == 120) {
+                celebrate(score)
+            }
+            else
+                scores.innerHTML = score;
+        }
+
+        function celebrate(score) {
+            question.innerHTML = `Congratulations, you answered every question correctly!`;
+            message.innerHTML = `Great Job! Refresh to Reload`;
+            Time = 1000;
+
+        }
+
+        function matchAns() {
+            ans;
+            if (question.innerHTML == `Joey used to share his flat with? A: Chandler, B: Ross, C: Monica, D: Rachel`) {
+                ans = `chandler`
+            } else if (question.innerHTML == `Joey doesn't share his? A: Drink, A: Food, C: Flat, D: Shoes`) {
+                ans = `food`
+            } else if (question.innerHTML == `Which famous actor was Joey the "butt double" for? A:Robert De Niro, B: Al Pacino C: Arnold D: Joe`) {
+                ans = `al pacino`;
+            } else if (question.innerHTML == `What book does Joey read while Rachel reads The Shining? A: Jane Eyre, B: Little Women, C: Pride & Prejudice D: Emma`) {
+                ans = `little women`
+            } else if (question.innerHTML == `Which letter encyclopedia volume does Joey buy? A: Q, B: T, C: X, D: V`) {
+                ans = `v`
+            } else if (question.innerHTML == `Which item left at the hotel signals to Joey that Chandler and Monica are dating? A: Tweezers, B: Eyelash Curler, C: Hair Dryer`) {
+                ans = `eyelash curler`
+            } else if (question.innerHTML == `How does Joey say he knows Mike when he sets Phoebe up on the blind date? A: School, B: Acting, C: Gym, D: Family friend`) {
+                ans = `school`
+            } else if (question.innerHTML == `What game show was Joey a contestant on? A: Wheel of Fortune, B: Pyramid, C: Jeopardy, D: Family Feud`) {
+                ans = `pyramid`
+            } else if (question.innerHTML == `Whose mother did Joey kiss at a party? A: Ross, B: Rachel, C: Chandler, D: Phoebe`) {
+                ans = `rachel`;
+            } else if (question.innerHTML == `In which city did Joey find out about Chandler and Monica? A: New York, B: London, C: Amsterdam`) {
+                ans = `london`
+            }
+
+
+
+            if (userans.value == ans) {
+                message.innerHTML = "Correct";
+                return true;
+            } else {
+                message.innerHTML = "Incorrect";
+                return false;
+            }
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

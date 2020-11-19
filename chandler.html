@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> F.R.I.E.N.D.S </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+        }
+
+        img {
+            border-radius: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="textStyle1"> Chnadler: Hahaha. Isaac Newton is pissed </h1>
+    <h1 class="textStyle1"> Play the below audio. I want to tell you something </h1>
+    <img src="https://media0.giphy.com/media/YQHBoOpGwdTwuBSZKs/200.webp?cid=ecf05e4702ty3r6jzyikzyxgkkyqh7fkq7kav10x9y9cr1su&rid=200.webp"
+        style="margin-left:620px;">
+    <audio class="audioClass" controls src="chandler.mp3">
+        Your browser does not support the
+        <code>audio</code> element.
+    </audio>
+    <h1 class="textStyle1"> Okay! let's see </h1> <br> <br>
+    <div class="row">
+        <div class="col-sm-6">
+            <img src="https://media1.giphy.com/media/fA81FF4mdE6lgeoJwb/200.webp?cid=ecf05e4702ty3r6jzyikzyxgkkyqh7fkq7kav10x9y9cr1su&rid=200.webp"
+                style="margin-left:80px;">
+            <h2 class="textStyle1" style="margin-left:-100px;"> I'll dance like this if you tell everything correctly
+            </h2>
+        </div>
+        <div class="col-sm-6">
+            <img src="https://media0.giphy.com/media/RJUpTset9XMphaFJ76/200.webp?cid=ecf05e47raf2qrujfouljmrtr4ptu3z4lj92nkkhnzq3qgd2&rid=200.webp"
+                style="margin-left:350px;">
+            <h2 class="textStyle1" style="margin-left:250px;"> Go to Hell you loser! </h2>
+        </div>
+    </div> <br>
+    <section>
+        <h2 class="textStyle1"> {{  Remember, as soon as you select the level, the clock starts ticking }} </h2>
+        <h2 class="textStyle1"> Please select the level first!
+            <div class="optionStyle">
+                <select id="level" onchange="actionOnSubmit()" style="align-items:center; text-align:center;">
+                    <option style="color:burlywood;"> Start </option>
+                    <option value="22" style="color:rgb(222, 141, 135);"> EASY </option>
+                    <option value="20" style="color:rgb(222, 141, 135);"> MEDIUM </option>
+                    <option value="18" style="color:rgb(222, 141, 135);;"> HARD </option>
+                </select>
+            </div>
+        </h2>
+
+        <h2 id="demo" class="textStyle"> </h2> <br> <br>
+        <h3 class="timeStyle"> Time Left: <span id="time"> 0 </span> </h3> <br> <br>
+        <h2 class="textStyle1"> Score: <span id="score"> 0 </span> </h2> <br>
+
+
+        <div class="centerdiv" id="centerdiv">
+            <h2 class="textStyle2">Make sure that you type everything in lowercase </h2>
+            <h3 class="textStyle2">TURN OFF THE CAPS LOCK </h3>
+            <div class="question">
+                <h1 class="textStyle" id="question"> Question: </h1>
+            </div>
+            <div class="middleBox">
+                <input type="text" id="answ" placeholder="Answer" class="inputTextStyle">
+            </div>
+            <h2 id="message" class="textStyle3"> </h2>
+            <img id="imageID">
+        </div>
+
+    </section>
+    <br><br><br><br>
+
+    <script>
+
+        let isPlaying;
+        let ans;
+        let score = 0;
+        let Time;
+
+        const scores = document.querySelector('#score');
+        const message = document.querySelector('#message');
+        const times = document.querySelector('#time');
+        const userans = document.querySelector('#answ');
+        const correctAns = document.querySelector("#correctAns");
+
+        function actionOnSubmit() {
+            var x = document.getElementById("level").value;
+            document.getElementById("demo").innerHTML = "The level you have selected has time limit: " + x + "  seconds";
+            Time = x;
+            setInterval(countdown, 1000);
+            setInterval(checkStatus, 1000);
+            setQuestion();
+            userans.addEventListener('input', startMatch);
+        }
+
+
+        function setQuestion() {
+            const array = [`Chandler used to share his flat with?`,
+                `Who married Chandler? A: Rachel, B: Monica, C: Phoebe`,
+                `What is the name of Chandler's married girlfriend? A: Alora, B; Aurora, C: Leonora, D: Laura`,
+                `What was engraved on the bracelet Joey gave Chandler? A: To my Pal, B: To my best bud`,
+                `Chandler couldn't remember which of Joey's sisters he kissed — can you? A: Mary Angela, B: Mary Therese`,
+                `What's the name of Chandler's ex-roommate who was phased out of the group? A: Kip, B: Danny, C: Ken, D: Dim`,
+                `What name does Jack Geller accidentally call Chandler A: Charlie, B: Chester, C: Chadwick, D; Chauncey`,
+                `Okay, and what name does Chandler's coworker call him? A: Tony, B: Tommy, C: Toby`
+            ]
+            const index = Math.floor(Math.random() * array.length);
+            question.innerHTML = array[index];
+        }
+
+        function checkStatus() {
+            if (!isPlaying && Time === 0) {
+                message.innerHTML = `Game over!! The correct answer is "${ans}". Refresh to play again`;
+                $('#centerdiv').text("Time's Up! Refresh the page to start again!");
+                $('#centerdiv').css({
+                    color: "#fff0f0",
+                    fontSize: "38px",
+                    fontFamily: "Caveat, cuursive"
+                })
+            }
+        }
+
+        function countdown() {
+            if (Time > 0)
+                Time--;
+            else if (Time === 0) {
+                isPlaying = false;
+                score = -10;
+            }
+            times.innerHTML = Time;
+        }
+
+        function startMatch() {
+            if (matchAns()) {
+                Time = document.getElementById("level").value;
+                userans.value = "";
+                setQuestion()
+                score = score + 10;
+
+
+            }
+            if (score === -10)
+                scores.innerHTML = 0;
+            else if (score == 120) {
+                celebrate(score)
+            }
+            else
+                scores.innerHTML = score;
+        }
+
+        function celebrate(score) {
+            question.innerHTML = `Congratulations, you answered every question correctly!`;
+            message.innerHTML = `Great Job! Refresh to Reload`;
+            Time = 1000;
+
+        }
+
+        function matchAns() {
+            ans;
+            if (question.innerHTML == `Chandler used to share his flat with?`) {
+                ans = `joey`
+            } else if (question.innerHTML == `Who married Chandler? A: Rachel, B: Monica, C: Phoebe`) {
+                ans = `monica`
+            } else if (question.innerHTML == `What is the name of Chandler's married girlfriend? A: Alora, B; Aurora, C: Leonora, D: Laura`) {
+                ans = `aurora`;
+            } else if (question.innerHTML == `What was engraved on the bracelet Joey gave Chandler? A: To my Pal, B: To my best bud`) {
+                ans = `to my best bud`
+            } else if (question.innerHTML == `Chandler couldn't remember which of Joey's sisters he kissed — can you? A: Mary Angela, B: Mary Therese`) {
+                ans = `mary angela`
+            } else if (question.innerHTML == `What's the name of Chandler's ex-roommate who was phased out of the group? A: Kip, B: Danny, C: Ken, D: Dim`) {
+                ans = `kip`
+            } else if (question.innerHTML == `What name does Jack Geller accidentally call Chandler A: Charlie, B: Chester, C: Chadwick, D; Chauncey`) {
+                ans = `chauncey`
+            } else if (question.innerHTML == `Okay, and what name does Chandler's coworker call him? A: Tony, B: Tommy, C: Toby`) {
+                ans = `toby`
+            }
+
+
+
+            if (userans.value == ans) {
+                message.innerHTML = "Correct";
+                return true;
+            } else {
+                message.innerHTML = "Incorrect";
+                return false;
+            }
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>
